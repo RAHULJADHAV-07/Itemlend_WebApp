@@ -446,6 +446,37 @@ body {
   z-index: var(--z-modal);
 }
 
+.modal-content-positioned {
+  background: var(--color-gray-800);
+  border: 1px solid var(--color-gray-600);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 300px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: var(--z-modal);
+  animation: fadeInScale 0.2s ease-out;
+}
+
+.modal-content-positioned h3 {
+  color: var(--color-white);
+}
+
+.modal-content-positioned p {
+  color: var(--color-gray-300);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* Toast Styles */
 .toast-container {
   position: fixed;

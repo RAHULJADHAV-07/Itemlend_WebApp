@@ -11,8 +11,6 @@ const BorrowerView = () => {
   const { user } = useAuth();
   const { showSuccess, ToastContainer } = useToast();
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showInterestModal, setShowInterestModal] = useState(false);
-  const [interestProduct, setInterestProduct] = useState(null);
 
   const availableProducts = getAvailableProducts().filter(p => p.lenderId !== user.id);
 
@@ -25,19 +23,7 @@ const BorrowerView = () => {
   };
 
   const handleExpressInterest = (product) => {
-    setInterestProduct(product);
-    setShowInterestModal(true);
-  };
-
-  const handleInterestSubmit = () => {
-    showSuccess(`Interest expressed for "${interestProduct.title}"! The lender will be notified.`);
-    setShowInterestModal(false);
-    setInterestProduct(null);
-  };
-
-  const handleInterestCancel = () => {
-    setShowInterestModal(false);
-    setInterestProduct(null);
+    showSuccess(`Interest expressed for "${product.title}"! The lender will be notified.`);
   };
 
   if (selectedProduct) {
@@ -198,38 +184,6 @@ const BorrowerView = () => {
           showFilters={true}
         />
       </div>
-
-      {/* Interest Modal */}
-      {showInterestModal && (
-        <div className="modal-backdrop" onClick={handleInterestCancel}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Express Interest
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Are you interested in renting "{interestProduct?.title}"? 
-                The lender will be notified of your interest and can contact you directly.
-              </p>
-              <div className="flex gap-4">
-                <Button
-                  onClick={handleInterestSubmit}
-                  className="flex-1"
-                >
-                  Yes, I'm Interested
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={handleInterestCancel}
-                  className="flex-1"
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <ToastContainer />
     </div>
